@@ -1,4 +1,3 @@
-import { ForkOptions } from 'child_process';
 import * as THREE from 'three'
 
 class ledCube {
@@ -10,6 +9,7 @@ class ledCube {
         for (x = 0; x <= 7; x++) {
             this.faces.push(new cubeFace());
         }
+        this.setColor(0x000000);
     }
 
     setColor(ledColor:number) {
