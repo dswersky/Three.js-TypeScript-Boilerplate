@@ -9,7 +9,7 @@ class ledCube {
         for (x = 0; x <= 7; x++) {
             this.faces.push(new cubeFace());
         }
-        this.setColor(0x000000);
+        this.setColor(0xFFFFFF);
     }
 
     setColor(ledColor:number) {
@@ -25,7 +25,7 @@ class cubeFace {
 
     constructor() {
         this.ledMatrix = new Array<Array<THREE.Color>>();
-        this.initFace(0x000000);    
+        this.initFace(0xFFFFFF);    
     }
 
     initFace(ledColor:number) {

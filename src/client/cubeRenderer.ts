@@ -27,6 +27,9 @@ class cubeRenderer {
     renderCube() {
         //initialize ledSpheres matrix
         var f, x, y
+        var xpos = 0
+        var ypos = 0
+        var zpos = 0
         //Iterate through faces
         for (f = 0; f <= 7; f++) {
             //Build an 8x8 matrix for each face
@@ -35,14 +38,11 @@ class cubeRenderer {
                 this.sphereMatrix[f].push(new Array<THREE.Mesh>());
                 for (y = 0; y <= 7; y++) {
                     var material = new THREE.MeshBasicMaterial( {color: this.cube.faces[f].ledMatrix[x][y]});
-                    var geometry = new THREE.SphereGeometry(.5, 32, 32);
+                    var geometry = new THREE.SphereGeometry(.1, 32, 32);
                     var s = new THREE.Mesh(geometry, material);
-                    var xpos = 0
-                    var ypos = 0
-                    var zpos = 0
-                    xpos *= this.ledSpacing;
-                    ypos *= this.ledSpacing;
-                    zpos = (f + 1) * -4;
+                    xpos = x + this.ledSpacing;
+                    ypos = y + this.ledSpacing;
+                    zpos = (f + 1) * -1;
                     s.position.set(xpos,ypos,zpos)
                     this.sphereMatrix[f][x].push(s);
                     this.scene.add(s);

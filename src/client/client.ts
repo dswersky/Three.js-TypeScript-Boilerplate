@@ -2,6 +2,8 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import Stats from 'three/examples/jsm/libs/stats.module'
 import {GUI} from 'three/examples/jsm/libs/dat.gui.module'
+import { cubeRenderer } from './cubeRenderer' 
+import { ledCube } from './ledCube'
 
 const scene: THREE.Scene = new THREE.Scene()
 
@@ -13,13 +15,14 @@ document.body.appendChild(renderer.domElement)
 
 const controls = new OrbitControls(camera, renderer.domElement)
 
-const geometry: THREE.BoxGeometry = new THREE.BoxGeometry()
-const material: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true })
+// const geometry: THREE.BoxGeometry = new THREE.BoxGeometry()
+// const material: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true })
 
-const cube: THREE.Mesh = new THREE.Mesh(geometry, material)
-scene.add(cube)
+// const cube: THREE.Mesh = new THREE.Mesh(geometry, material)
+// scene.add(cube)
 
-camera.position.z = 2
+
+camera.position.z = 4
 
 window.addEventListener('resize', onWindowResize, false)
 function onWindowResize() {
@@ -32,15 +35,24 @@ function onWindowResize() {
 const stats = Stats()
 document.body.appendChild(stats.dom)
 
-const gui = new GUI()
-const cubeFolder = gui.addFolder("Cube")
-cubeFolder.add(cube.rotation, "x", 0, Math.PI * 2, 0.01)
-cubeFolder.add(cube.rotation, "y", 0, Math.PI * 2, 0.01)
-cubeFolder.add(cube.rotation, "z", 0, Math.PI * 2, 0.01)
-cubeFolder.open()
-const cameraFolder = gui.addFolder("Camera")
-cameraFolder.add(camera.position, "z", 0, 10, 0.01)
-cameraFolder.open()
+// const gui = new GUI()
+// const cubeFolder = gui.addFolder("Cube")
+// cubeFolder.add(cube.rotation, "x", 0, Math.PI * 2, 0.01)
+// cubeFolder.add(cube.rotation, "y", 0, Math.PI * 2, 0.01)
+// cubeFolder.add(cube.rotation, "z", 0, Math.PI * 2, 0.01)
+// cubeFolder.open()
+// const cameraFolder = gui.addFolder("Camera")
+// cameraFolder.add(camera.position, "z", 0, 10, 0.01)
+// cameraFolder.open()
+
+var l = new ledCube();
+var r = new cubeRenderer(l, scene, 4);
+r.renderCube();
+console.log(scene.children.length);
+// var center = r.sphereMatrix[4][4][4];
+// var bb = new THREE.Box3();
+// bb.setFromObject(center);
+// bb.setFromCenterAndSize()
 
 var animate = function () {
     requestAnimationFrame(animate)
