@@ -29,6 +29,7 @@ test('set cube color', ()=>{
 
 test('cubeRenderer inits sphere matrix', ()=> {
   var c = new ledCube();
-  var r = new cubeRenderer(c, null, 4);
-  expect(r.ledSpheres[7].length).toBe(8);
+  var s = new THREE.Scene();
+  var r = new cubeRenderer(c, s, 4);
+  expect(s.children.length).toBe(512);
 });
