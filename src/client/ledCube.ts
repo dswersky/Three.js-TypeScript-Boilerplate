@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 
+/// Contains the led colors for a single animation frame
 class ledCube {
     faces:Array<cubeFace>;
 

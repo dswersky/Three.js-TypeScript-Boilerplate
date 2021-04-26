@@ -15,7 +15,7 @@ test('cube is initialized', () =>{
 
 test('cube addressable led', ()=> {
   var c = new ledCube();
-  var color = new THREE.Color(0x000000);
+  var color = new THREE.Color(0xFFFFFF);
   expect(c.faces[0].ledMatrix[7][7]).toEqual(color);
 });
 

@@ -4,6 +4,8 @@ import Stats from 'three/examples/jsm/libs/stats.module'
 import {GUI} from 'three/examples/jsm/libs/dat.gui.module'
 import { cubeRenderer } from './cubeRenderer' 
 import { ledCube } from './ledCube'
+import { Mesh, MeshBasicMaterial, SphereGeometry } from 'three'
+import { getuid } from 'process'
 
 const scene: THREE.Scene = new THREE.Scene()
 
@@ -15,14 +17,6 @@ document.body.appendChild(renderer.domElement)
 
 const controls = new OrbitControls(camera, renderer.domElement)
 
-// const geometry: THREE.BoxGeometry = new THREE.BoxGeometry()
-// const material: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true })
-
-// const cube: THREE.Mesh = new THREE.Mesh(geometry, material)
-// scene.add(cube)
-
-
-camera.position.z = 4
 
 window.addEventListener('resize', onWindowResize, false)
 function onWindowResize() {
@@ -35,24 +29,57 @@ function onWindowResize() {
 const stats = Stats()
 document.body.appendChild(stats.dom)
 
-// const gui = new GUI()
-// const cubeFolder = gui.addFolder("Cube")
-// cubeFolder.add(cube.rotation, "x", 0, Math.PI * 2, 0.01)
-// cubeFolder.add(cube.rotation, "y", 0, Math.PI * 2, 0.01)
-// cubeFolder.add(cube.rotation, "z", 0, Math.PI * 2, 0.01)
-// cubeFolder.open()
-// const cameraFolder = gui.addFolder("Camera")
-// cameraFolder.add(camera.position, "z", 0, 10, 0.01)
-// cameraFolder.open()
+
+camera.position.x = 1.8;
+camera.position.y = .5;
+camera.position.z = 13;
+
+camera.lookAt(new THREE.Vector3(0,0,0));
 
 var l = new ledCube();
 var r = new cubeRenderer(l, scene, 4);
-r.renderCube();
 console.log(scene.children.length);
-// var center = r.sphereMatrix[4][4][4];
-// var bb = new THREE.Box3();
-// bb.setFromObject(center);
-// bb.setFromCenterAndSize()
+
+const gui = new GUI()
+
+
+const cubeFolder = gui.addFolder("Cube");
+const cameraFolder = gui.addFolder("Camera");
+cubeFolder.open();
+cameraFolder.open();
+cubeFolder.add(r.ledGroup.position, 'x', -50, 50)
+cubeFolder.add(r.ledGroup.position, 'y', -50, 50)
+cubeFolder.add(r.ledGroup.position, 'z', -50, 50)
+cameraFolder.add(camera.position, 'x', -20, 20)
+cameraFolder.add(camera.position, 'y', -20, 20)
+cameraFolder.add(camera.position, 'z', -20, 20)
+
+
+
+var clock = new THREE.Clock();
+
+var startFrameUpdate = function () {
+    var frameID = setInterval(frameUpdate, 500);
+}
+
+var x = 0;
+var led;
+var frameUpdate = function () {
+    var led = scene.getObjectByName(x + '_0_0') as THREE.Mesh;
+    var prevled = scene.getObjectByName(x-1 + '_0_0') as THREE.Mesh;
+    if (x <= 7) {
+        led.material = new THREE.MeshBasicMaterial({color: 0xFF0000});
+        if (prevled) {
+            prevled.material = new THREE.MeshBasicMaterial({color:0xFFFFFF});
+        }
+        x++;
+    }
+    else {
+        x = 0;
+        prevled.material = new THREE.MeshBasicMaterial({color: 0xFFFFFF});
+    }
+}
+
 
 var animate = function () {
     requestAnimationFrame(animate)
@@ -64,7 +91,10 @@ var animate = function () {
     stats.update()
 };
 
+var x = 0;
+var led:any;
 function render() {
-    renderer.render(scene, camera)
+    renderer.render(scene, camera)     
 }
 animate();
+startFrameUpdate();
