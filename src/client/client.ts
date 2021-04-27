@@ -59,14 +59,14 @@ cameraFolder.add(camera.position, 'z', -20, 20)
 var clock = new THREE.Clock();
 
 var startFrameUpdate = function () {
-    var frameID = setInterval(frameUpdate, 500);
+    var frameID = setInterval(frameUpdate, 250);
 }
 
 var x = 0;
 var led;
 var frameUpdate = function () {
-    var led = scene.getObjectByName(x + '_0_0') as THREE.Mesh;
-    var prevled = scene.getObjectByName(x-1 + '_0_0') as THREE.Mesh;
+    var led = scene.getObjectByName(x + '_0_1') as THREE.Mesh;
+    var prevled = scene.getObjectByName(x-1 + '_0_1') as THREE.Mesh;
     if (x <= 7) {
         led.material = new THREE.MeshBasicMaterial({color: 0xFF0000});
         if (prevled) {

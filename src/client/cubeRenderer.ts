@@ -36,6 +36,7 @@ class cubeRenderer {
         bb = new BoxHelper(box, 0xFFFFFF);
         this.ledGroup.add(bb);
         scene.add(this.ledGroup); 
+        this.ledGroup.rotateZ(-Math.PI / 2);
     }
 
     renderCube() {
