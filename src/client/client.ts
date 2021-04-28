@@ -4,8 +4,7 @@ import Stats from 'three/examples/jsm/libs/stats.module'
 import {GUI} from 'three/examples/jsm/libs/dat.gui.module'
 import { cubeRenderer } from './cubeRenderer' 
 import { ledCube } from './ledCube'
-import { Mesh, MeshBasicMaterial, SphereGeometry } from 'three'
-import { getuid } from 'process'
+import { TestPattern } from './animations'
 
 const scene: THREE.Scene = new THREE.Scene()
 
@@ -55,18 +54,27 @@ cameraFolder.add(camera.position, 'y', -20, 20)
 cameraFolder.add(camera.position, 'z', -20, 20)
 
 
-
-var clock = new THREE.Clock();
-
 var startFrameUpdate = function () {
-    var frameID = setInterval(frameUpdate, 250);
+    var frameID = setInterval(simpleTestPattern, 250);
 }
 
-var x = 0;
-var led;
-var frameUpdate = function () {
-    var led = scene.getObjectByName(x + '_0_1') as THREE.Mesh;
-    var prevled = scene.getObjectByName(x-1 + '_0_1') as THREE.Mesh;
+var simpleTest = function () {
+    var c = new ledCube();
+    c.faces[1].ledMatrix[7][7] = new THREE.Color(0xFF0000);
+    r.loadCubeFrame(c);
+}
+
+var basicTestPattern = function() {
+    var t = new TestPattern();
+    t.BasicPattern(scene);
+    var c = 0;
+    
+} 
+
+var simpleTestPattern = function () {
+    var led = scene.getObjectByName(x + '_0_0') as THREE.Mesh;
+    var prevled = scene.getObjectByName(x-1 + '_0_0') as THREE.Mesh;
+    
     if (x <= 7) {
         led.material = new THREE.MeshBasicMaterial({color: 0xFF0000});
         if (prevled) {
@@ -92,9 +100,9 @@ var animate = function () {
 };
 
 var x = 0;
-var led:any;
 function render() {
     renderer.render(scene, camera)     
 }
 animate();
-startFrameUpdate();
+simpleTest();
+//startFrameUpdate();

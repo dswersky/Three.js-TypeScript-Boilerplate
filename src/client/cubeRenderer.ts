@@ -70,17 +70,17 @@ class cubeRenderer {
         return x.toString() + '_' + y.toString() + '_' + z.toString();
     }
 
-    updateCube(cubeFrame:ledCube) {
+    loadCubeFrame(cubeFrame:ledCube) {
         this.cubeFrame = cubeFrame;        
         var f, x, y, z
         //Iterate through faces
-        for (f = 0; f <= 7; f++) {
+        for (z = 0; z <= 7; z++) {
             //Iterate through columns
             for (x = 0; x <= 7; x++) {
                 //Update leds
-                //this.sphereMatrix[f].push(new Array<THREE.Mesh>());
                 for (y = 0; y <= 7; y++) {
-                //    this.sphereMatrix[f][x][y].material = new THREE.MeshBasicMaterial( {color: this.cube.faces[f].ledMatrix[x][y]});
+                    var led = this.scene.getObjectByName(x + '_' + y + '_' + z) as THREE.Mesh;
+                    led.material = new THREE.MeshBasicMaterial( {color: this.cubeFrame.faces[z].ledMatrix[x][y]});
                 }
             }
         }
