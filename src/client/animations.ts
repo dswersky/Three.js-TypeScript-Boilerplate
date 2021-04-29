@@ -31,7 +31,7 @@ class TestPattern {
 
         renderer = new cubeRenderer(this.frames[0], scene, 4);
         this.frames.forEach(() => {
-
+            
         });
     }
 }

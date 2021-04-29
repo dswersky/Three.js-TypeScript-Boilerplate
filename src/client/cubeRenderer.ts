@@ -65,6 +65,9 @@ class cubeRenderer {
         }
     }
 
+    public playAnimation(frames:Array<ledCube>) {
+        
+    }
 
     ledName(x:number,y:number,z:number) {
         return x.toString() + '_' + y.toString() + '_' + z.toString();

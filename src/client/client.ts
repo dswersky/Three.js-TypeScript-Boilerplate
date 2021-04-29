@@ -68,24 +68,32 @@ var basicTestPattern = function() {
     var t = new TestPattern();
     t.BasicPattern(scene);
     var c = 0;
-    
 } 
 
 var simpleTestPattern = function () {
-    var led = scene.getObjectByName(x + '_0_0') as THREE.Mesh;
-    var prevled = scene.getObjectByName(x-1 + '_0_0') as THREE.Mesh;
+    r.ledGroup.children.forEach((item, i) => {
+        setTimeout(() => {
+            var m = item as THREE.Mesh;
+            m.material = new THREE.MeshBasicMaterial({color:0xFF0000});
+        }, i * 250);
+    });
+
+
+
+    // var led = scene.getObjectByName('1_' + x + '_0') as THREE.Mesh;
+    // var prevled = scene.getObjectByName('1_' + (x-1).toString() + '_0') as THREE.Mesh;
     
-    if (x <= 7) {
-        led.material = new THREE.MeshBasicMaterial({color: 0xFF0000});
-        if (prevled) {
-            prevled.material = new THREE.MeshBasicMaterial({color:0xFFFFFF});
-        }
-        x++;
-    }
-    else {
-        x = 0;
-        prevled.material = new THREE.MeshBasicMaterial({color: 0xFFFFFF});
-    }
+    // if (x <= 7) {
+    //     led.material = new THREE.MeshBasicMaterial({color: 0xFF0000});
+    //     if (prevled) {
+    //         prevled.material = new THREE.MeshBasicMaterial({color:0xFFFFFF});
+    //     }
+    //     x++;
+    // }
+    // else {
+    //     x = 0;
+    //     prevled.material = new THREE.MeshBasicMaterial({color: 0xFFFFFF});
+    // }
 }
 
 
@@ -104,5 +112,6 @@ function render() {
     renderer.render(scene, camera)     
 }
 animate();
-simpleTest();
+//simpleTest();
 //startFrameUpdate();
+//simpleTestPattern();
