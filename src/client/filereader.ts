@@ -1,7 +1,7 @@
 import { cubeFace } from '../client/ledCube';
 import { ledCube } from '../client/ledCube';
 import { cubeRenderer } from '../client/cubeRenderer'
-import * as fs from 'fs'
+import {readFileSync} from 'fs'
 import * as THREE from 'three'
 
 class animationFileReader {
@@ -14,7 +14,7 @@ class animationFileReader {
     }
 
     openFile(fileName:string) {
-        this.fileString = fs.readFileSync(fileName, 'utf8');
+        this.fileString = readFileSync(fileName, 'utf8');
         return this.fileString.length;
     }
 
@@ -24,11 +24,7 @@ class animationFileReader {
         //Get frame count
         fc = this.fileString.length / 3072;
         for (x = 0; x < fc; x++) {
-            var l = new ledCube();
-            //x * 3072 + x <> x * 3072 + x + 6
-            //x * 3072 to x * 3072 + ()
-            var frameStr = this.fileString.substring(x * 3072, (x * 3072 + 3072));
-            this.frames.push(l);
+            this.loadFrame(x);
         }
     }
 
@@ -59,13 +55,6 @@ class animationFileReader {
         else { 
             //throw error
         }
-        // for (x = 0; x < fc; x++) {
-        //     var l = new ledCube();
-        //     //x * 3072 + x <> x * 3072 + x + 6
-        //     //x * 3072 to x * 3072 + ()
-        //     var frameStr = fileBuffer.substring(x * 3072, (x * 3072 + 3072));
-        //     this.frames.push(l);
-        // }
     }
 
     ascii_to_hexa(str:string)

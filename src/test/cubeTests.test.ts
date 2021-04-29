@@ -77,3 +77,10 @@ test('filereader loads frame', ()=>{
   expect(f.frames[0].faces[0].ledMatrix[0][0]).toEqual(new THREE.Color(0xF00000));
   expect(f.frames[0].faces[0].ledMatrix[1][0]).toEqual(new THREE.Color(0x000000));
 });
+
+test('filereader loads all frames', () => {
+  var f = new animationFileReader();
+  f.openFile(__dirname + '/test.rgbCUBE8');
+  f.loadFrames();
+  expect(f.frames.length).toBe(100);
+});

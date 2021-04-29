@@ -5,6 +5,7 @@ import {GUI} from 'three/examples/jsm/libs/dat.gui.module'
 import { cubeRenderer } from './cubeRenderer' 
 import { ledCube } from './ledCube'
 import { TestPattern } from './animations'
+import { animationFileReader } from './filereader'
 
 const scene: THREE.Scene = new THREE.Scene()
 
@@ -37,7 +38,7 @@ camera.lookAt(new THREE.Vector3(0,0,0));
 
 var l = new ledCube();
 var r = new cubeRenderer(l, scene, 4);
-console.log(scene.children.length);
+var reader = new animationFileReader();  
 
 const gui = new GUI()
 
@@ -77,23 +78,6 @@ var simpleTestPattern = function () {
             m.material = new THREE.MeshBasicMaterial({color:0xFF0000});
         }, i * 250);
     });
-
-
-
-    // var led = scene.getObjectByName('1_' + x + '_0') as THREE.Mesh;
-    // var prevled = scene.getObjectByName('1_' + (x-1).toString() + '_0') as THREE.Mesh;
-    
-    // if (x <= 7) {
-    //     led.material = new THREE.MeshBasicMaterial({color: 0xFF0000});
-    //     if (prevled) {
-    //         prevled.material = new THREE.MeshBasicMaterial({color:0xFFFFFF});
-    //     }
-    //     x++;
-    // }
-    // else {
-    //     x = 0;
-    //     prevled.material = new THREE.MeshBasicMaterial({color: 0xFFFFFF});
-    // }
 }
 
 

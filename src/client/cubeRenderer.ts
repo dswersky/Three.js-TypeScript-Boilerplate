@@ -66,7 +66,11 @@ class cubeRenderer {
     }
 
     public playAnimation(frames:Array<ledCube>) {
-        
+        frames.forEach((item, i) => {
+            setTimeout(() => {
+                this.loadCubeFrame(item);                
+            }, i * 250);
+        });
     }
 
     ledName(x:number,y:number,z:number) {

@@ -8,6 +8,9 @@ module.exports = {
         contentBase: './dist/client',
         hot: true,
     },
+    externals: {
+        "fs": "require('fs')"
+    },
     module: {
         rules: [
             {
@@ -19,6 +22,9 @@ module.exports = {
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
+        fallback: {
+            fs: false
+        }
     },
     output: {
         filename: 'bundle.js',
@@ -26,5 +32,5 @@ module.exports = {
     },
     performance: {
         hints: false
-    }
+    }    
 };
