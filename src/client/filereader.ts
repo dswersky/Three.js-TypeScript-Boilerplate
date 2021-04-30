@@ -1,7 +1,7 @@
 import { cubeFace } from '../client/ledCube';
 import { ledCube } from '../client/ledCube';
 import { cubeRenderer } from '../client/cubeRenderer'
-import {readFileSync} from 'fs'
+import * as fs from 'fs'
 import * as THREE from 'three'
 
 class animationFileReader {
@@ -14,8 +14,13 @@ class animationFileReader {
     }
 
     openFile(fileName:string) {
-        this.fileString = readFileSync(fileName, 'utf8');
-        return this.fileString.length;
+        var loader = new THREE.FileLoader();
+        THREE.Cache.enabled = true;
+        var p = loader.loadAsync(fileName);
+        p.then((r)=>{
+            this.fileString = r.toString();
+        });
+        return p;
     }
 
     loadFrames() {

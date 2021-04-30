@@ -69,7 +69,7 @@ class cubeRenderer {
         frames.forEach((item, i) => {
             setTimeout(() => {
                 this.loadCubeFrame(item);                
-            }, i * 250);
+            }, i * 50);
         });
     }
 

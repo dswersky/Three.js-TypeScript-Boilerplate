@@ -38,7 +38,11 @@ camera.lookAt(new THREE.Vector3(0,0,0));
 
 var l = new ledCube();
 var r = new cubeRenderer(l, scene, 4);
-var reader = new animationFileReader();  
+var reader = new animationFileReader();
+reader.openFile('test.rgbCUBE8').then(()=>{
+    reader.loadFrames();
+    r.playAnimation(reader.frames);
+});
 
 const gui = new GUI()
 

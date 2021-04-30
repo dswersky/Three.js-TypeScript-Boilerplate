@@ -8,9 +8,6 @@ module.exports = {
         contentBase: './dist/client',
         hot: true,
     },
-    externals: {
-        "fs": "require('fs')"
-    },
     module: {
         rules: [
             {
@@ -23,7 +20,8 @@ module.exports = {
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
         fallback: {
-            fs: false
+            fs: false,
+            util: false
         }
     },
     output: {
