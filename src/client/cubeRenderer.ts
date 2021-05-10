@@ -36,7 +36,6 @@ class cubeRenderer {
         bb = new BoxHelper(box, 0xFFFFFF);
         this.ledGroup.add(bb);
         scene.add(this.ledGroup); 
-        this.ledGroup.rotateZ(-Math.PI / 2);
     }
 
     renderCube() {
@@ -80,6 +79,7 @@ class cubeRenderer {
     loadCubeFrame(cubeFrame:ledCube) {
         this.cubeFrame = cubeFrame;        
         var f, x, y, z
+        var black = new THREE.Color(0x000000);
         //Iterate through faces
         for (z = 0; z <= 7; z++) {
             //Iterate through columns
@@ -87,7 +87,13 @@ class cubeRenderer {
                 //Update leds
                 for (y = 0; y <= 7; y++) {
                     var led = this.scene.getObjectByName(x + '_' + y + '_' + z) as THREE.Mesh;
-                    led.material = new THREE.MeshBasicMaterial( {color: this.cubeFrame.faces[z].ledMatrix[x][y]});
+                    if (cubeFrame.faces[z].ledMatrix[x][y].getHex() == 0x000000) {
+                        led.material = new THREE.MeshPhongMaterial( {color: 0xFFFFFF, opacity:0.5, transparent:true});
+                        //console.log('black');
+                    }
+                    else {
+                        led.material = new THREE.MeshBasicMaterial( {color: this.cubeFrame.faces[z].ledMatrix[x][y]});
+                    }
                 }
             }
         }
