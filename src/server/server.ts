@@ -33,7 +33,7 @@ class App {
 
     public Start() {
         this.server.listen(this.port, () => {
-            console.log( `Server listening on port ${this.port}.` )
+            console.log( `Server is listening on port ${this.port}.` )
         })
     }
 }

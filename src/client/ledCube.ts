@@ -11,14 +11,14 @@ class ledCube {
             this.faces.push(new cubeFace());
         }
         this.setColor(0x000000);
-    }
+    } 
 
     setColor(ledColor:number) {
         this.faces.forEach((item, index) => {
             item.setColor(ledColor);
         });
-    }
-}
+    } 
+} 
 
 class cubeFace {
     //Each face is an 8x8 matrix of led colors
@@ -39,7 +39,7 @@ class cubeFace {
                 this.ledMatrix[x].push(new THREE.Color(ledColor));
             }
         }
-    }
+    } 
 
     setColor(ledColor:number) {
         var x,y = 0;
